@@ -11881,23 +11881,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -11928,7 +11928,7 @@ Minimum price: $105000.00
 Maximum price: $1024800.00
 Mean price: $454342.94
 Median price $438900.00
-Standard deviation of prices: $165340.28
+Standard deviation of prices: $165171.13
 </pre>
 </div>
 </div>
@@ -12414,10 +12414,10 @@ Standard deviation of prices: $165340.28
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#38382;&#39064;-8---&#22238;&#31572;&#65306;">&#38382;&#39064; 8 - &#22238;&#31572;&#65306;<a class="anchor-link" href="#&#38382;&#39064;-8---&#22238;&#31572;&#65306;">&#182;</a></h3><ul>
-<li>K折交叉验证：为了循环利用数据，并且避免训练集和测试集选择不当，将数据分为K份，分别选择其中一份作为测试集，剩余作为训练集来验证模型的精度。</li>
-<li>GridSearchCV可以通过参数cv来设置K折交叉验证的数量或者自定义交叉验证的迭代器，通过更精确的验证方法来评估最佳参数组合。</li>
+<li>K折交叉验证：为了循环利用数据，并且避免训练集和验证集选择不当，将训练数据分为K份，并分别选择其中一份作为验证集，剩余作为训练集来验证模型的精度。一组参数经过K折交叉验证之后会得到K个分数，再取均值得到最终评分。</li>
+<li>GridSearchCV可以通过参数cv来设置K折交叉验证的数量或者自定义交叉验证的迭代器，一组参数经过K折交叉验证之后会得到K个分数，再取均值得到最终评分，从而评估出最佳参数组合。</li>
 <li>GridSearchCV 中的'cv<em>results</em>'属性存储了网格搜索的结果，如参数列表，各种评分，训练时间等。</li>
-<li>网格搜索中使用K折交叉验证会更加精确和全面地进行评估，相较于不使用交叉验证，能够避免训练集和测试集选择不当导致对选择最佳参数的影响</li>
+<li>网格搜索中使用K折交叉验证会更加精确和全面地进行评估，相较于不使用交叉验证，能够避免训练集和验证集选择不当导致对选择最佳参数的影响</li>
 </ul>
 
 </div>
@@ -12639,7 +12639,40 @@ Predicted selling price for Client 3&#39;s home: $888,720.00
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#38382;&#39064; 10 - &#22238;&#31572;&#65306;<a class="anchor-link" href="#&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#182;</a></h3><ul>
 <li>依据预测结果，建议三位客户的房屋销售的价格分别为：410,307.69美元、226,617.39美元、844,200.00美元</li>
-<li>从房屋特征的数值判断，这样的价格合理。根据之前的特征分析，由于客户2的房屋房间数最少，社区贫困指数最高，教育条件最差，因此房屋售价最低。相反，客户3的房屋房间数最多，社区贫困指数最低，教育条件最好，因此房屋售价最高。客户1则位于二者之间。</li>
+<li>定性分析：参照之前的特征分析，由于客户2的房屋房间数最少，社区贫困指数最高，教育条件最差，因此房屋售价最低。相反，客户3的房屋房间数最多，社区贫困指数最低，教育条件最好，因此房屋售价最高。客户1则位于二者之间。因此，房屋按照档次划分，1为中档房屋，2为低档房屋，3为高档房屋</li>
+<li>定量分析：根据房屋的统计数据进行量化分析，中档房屋1与均值中值接近，高档房屋3趋近于最大值，低档房屋趋近于最小值。房屋的预测价格水平与统计数据相符。  </li>
+</ul>
+<table>
+<thead><tr>
+<th>Statistical Indicators</th>
+<th>Value($)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minimum Price</td>
+<td>105000.00  </td>
+</tr>
+<tr>
+<td>Maximum Price</td>
+<td>1024800.00  </td>
+</tr>
+<tr>
+<td>Mean Price</td>
+<td>454342.94  </td>
+</tr>
+<tr>
+<td>Median Price</td>
+<td>438900.00 </td>
+</tr>
+<tr>
+<td>Standard Deviation of Prices</td>
+<td>165171.13</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>结合定性和定量分析，最终可以得出，三栋房屋的价格预测合理。</li>
 </ul>
 
 </div>
